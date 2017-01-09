@@ -20,6 +20,8 @@
   <mapping class="javabrains.hibernate.introduction.entidades.Juego"></mapping>
   <mapping class="javabrains.hibernate.introduction.entidades.Jugador"></mapping>
   <mapping class="javabrains.hibernate.introduction.entidades.Pareja"></mapping>
+  <mapping class="javabrains.hibernate.introduction.entidades.Tapete"></mapping>
+  <mapping class="javabrains.hibernate.introduction.entidades.Tienda"></mapping>
   
  </session-factory>
 </hibernate-configuration>

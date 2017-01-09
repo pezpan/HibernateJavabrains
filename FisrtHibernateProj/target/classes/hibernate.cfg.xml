@@ -8,6 +8,7 @@
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.show_sql">true</property>
+  <property name="format_sql">true</property>
   <property name="hibernate.connection.password">1111</property>
   <!-- Con la siguiente anotacion podemos usar:
   		- create: elimina las tablas y las crea en cada ejecución, por lo que los datos que tuvieran se eliminan
@@ -19,6 +20,8 @@
   <mapping class="javabrains.hibernate.introduction.entidades.Juego"></mapping>
   <mapping class="javabrains.hibernate.introduction.entidades.Jugador"></mapping>
   <mapping class="javabrains.hibernate.introduction.entidades.Pareja"></mapping>
+  <mapping class="javabrains.hibernate.introduction.entidades.Tapete"></mapping>
+  <mapping class="javabrains.hibernate.introduction.entidades.Tienda"></mapping>
   
  </session-factory>
 </hibernate-configuration>

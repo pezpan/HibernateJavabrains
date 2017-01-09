@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -47,6 +48,25 @@ public class Jugador {
 	@JoinTable (name="JUGADOR_LISTA", joinColumns=@JoinColumn(name="JUGADOR_ID"),
 				inverseJoinColumns=@JoinColumn(name="JUEGO_ID"))
 	private Collection<Juego> coleccion = new ArrayList<Juego>();
+	
+	// Si no queremos que en una relacion one to many se cree una tabla extra que mapee los identificadores de las
+	// tablas implicadas en la relacion, no debemos indicar la opcion @JoinTable, y en la clase de la entidad secundaria,
+	// indicamos la variable para la que queremos que guarde el identificador de la entidad primaria, ya que no podemos
+	// indicar en la tabla jugador que puede tener muchos tapetes, pero si podemos indicar que cada tapate solo pertenece
+	// a un jugador, indicando el identificador de dicho jugador.
+	// Ademas, en esta entidad tenemos que indicar el nombre de la variable propietaria de esta relacion, es decir, el
+	// nombre de la variable de esta clase que se encuentra definida y anotada en la otra clase de la relacion, usando 
+	// la propiedad mappedBy. Con esto le decimos que no genere una tabla para esta relacion.
+	@OneToMany(mappedBy="propietario")
+	private Collection<Tapete> mistapetes = new ArrayList<Tapete>();
+	
+	// Para una relacion many to many, usamos la siguiente anotacion
+	@ManyToMany
+	// Como en la otra entidad hemos indicado que será la secundaria para que no genere dos tablas, aqui podemos definir
+	// el nombre que queremos que tenga la tabla que se generará, asi como los nombres de las columnas. Es opcional
+	@JoinTable (name="JUGADORES_TIENDAS", joinColumns=@JoinColumn(name="JUGADOR_ID"),
+	inverseJoinColumns=@JoinColumn(name="TIENDA_ID"))
+	private Collection<Tienda> tiendas = new ArrayList<Tienda>();
 
 	public int getIdUsuario() {
 		return idUsuario;
@@ -79,5 +99,23 @@ public class Jugador {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public Collection<Tapete> getMistapetes() {
+		return mistapetes;
+	}
+
+	public void setMistapetes(Collection<Tapete> mistapetes) {
+		this.mistapetes = mistapetes;
+	}
+
+	public Collection<Tienda> getTiendas() {
+		return tiendas;
+	}
+
+	public void setTiendas(Collection<Tienda> tiendas) {
+		this.tiendas = tiendas;
+	}
+	
+	
 		
 }
