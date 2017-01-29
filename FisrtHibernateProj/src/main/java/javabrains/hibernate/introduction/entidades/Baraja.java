@@ -8,13 +8,16 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.ManyToAny;
 
 @Entity
-public class Pareja {
+public class Baraja {
+	
 	@Id 
 	@GeneratedValue
 	private long id;
 	
-	private String nombre;
+	private int cuantascartas;
 	
+	@ManyToOne
+	Jugador jugador;
 	
 	public long getId() {
 		return id;
@@ -22,13 +25,18 @@ public class Pareja {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getNombre() {
-		return nombre;
+	public int getCuantascartas() {
+		return cuantascartas;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setCuantascartas(int cuantascartas) {
+		this.cuantascartas = cuantascartas;
 	}
-	
-	
+
+	public Jugador getJugador() {
+		return jugador;
+	}
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
+	}
 
 }

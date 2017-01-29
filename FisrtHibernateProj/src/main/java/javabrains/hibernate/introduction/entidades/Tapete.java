@@ -6,6 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 public class Tapete {
 	@Id 
@@ -23,6 +26,15 @@ public class Tapete {
 	@ManyToOne
 	@JoinColumn(name="JUGADOR_ID")
 	private Jugador propietario;
+	
+	// Si definimos una relacion, pero no se encuentra el objeto definido en la otra tabla, va a producir un error,
+	// Como por ejemplo si definimos la siguiente relacion entre tienda y tapete, sin que existan tapetes definidos en la
+	// tienda. Esto es una situacion habitual, y con la siguiente anotacion indicamos que no queremos que genere una
+	// excepcion en caso de que no encuentre la otra entidad
+	@ManyToOne
+	// Podemos indicar el tipo de accion que queremos que se haga cuando se detecte la excepcion. En este caso ignorar.
+	@NotFound(action=NotFoundAction.IGNORE)
+	private Tienda tienda;
 	
 	
 	public Jugador getPropietario() {

@@ -22,6 +22,7 @@
   <mapping class="javabrains.hibernate.introduction.entidades.Pareja"></mapping>
   <mapping class="javabrains.hibernate.introduction.entidades.Tapete"></mapping>
   <mapping class="javabrains.hibernate.introduction.entidades.Tienda"></mapping>
+  <mapping class="javabrains.hibernate.introduction.entidades.Baraja"></mapping>
   
  </session-factory>
 </hibernate-configuration>

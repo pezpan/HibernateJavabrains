@@ -3,6 +3,7 @@ package javabrains.hibernate.introduction.entidades;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -67,6 +68,25 @@ public class Jugador {
 	@JoinTable (name="JUGADORES_TIENDAS", joinColumns=@JoinColumn(name="JUGADOR_ID"),
 	inverseJoinColumns=@JoinColumn(name="TIENDA_ID"))
 	private Collection<Tienda> tiendas = new ArrayList<Tienda>();
+	
+	// Podemos definir una relacion indicando que si los objetos no se encuentras guardados en la base de datos, 
+	// haciendo un session.save, que los genere leyendo las propiedades de este objeto que se hayan definido, y que 
+	// genere estas entradas en la base de datos, de forma que no se produzca un error. Es muy util si tenemos muchos
+	// objetos que crear en la coleccion que estamos definiendo, 50 por ejemplo, y asi no tener que hacer 50 veces un
+	// session.save de los 50 objetos. Tenemos distintas operaciones disponibles en funcion de si queremos crear,
+	// borrar, etc, o hacerlo todo con all
+	@OneToMany(cascade=CascadeType.PERSIST)
+	@JoinTable (name="JUGADOR_BARAJAS", joinColumns=@JoinColumn(name="JUGADOR_ID"),
+	inverseJoinColumns=@JoinColumn(name="BARAJA_ID"))
+	private Collection <Baraja> listaBarajas = new ArrayList<Baraja>();
+	
+	public Collection<Baraja> getListaBarajas() {
+		return listaBarajas;
+	}
+
+	public void setListaBarajas(Collection<Baraja> listaBarajas) {
+		this.listaBarajas = listaBarajas;
+	}
 
 	public int getIdUsuario() {
 		return idUsuario;
